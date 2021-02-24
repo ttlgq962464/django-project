@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FBA</title>
+</head>
+<body>
+<h3>FBA补货参数输入</h3>
+<form method="post" action="/condition">
+    {% csrf_token %}
+    请输入sku--<input type="text" name="number1" autocomplete="off"><br><br>
+    请选择站点--<select name="number2">
+    {% for x in site_list %}
+    <option value="{{ x }}">{{ x }}</option>
+    {% endfor %}
+    </select><br><br>
+<!--    站点&#45;&#45;<input type="text" name="number2"><br><br>-->
+<!--    <p>{{ site_list.site.label }}   {{ site_list.site }}</p>-->
+    <input type="submit" value="提交"/><br>
+</form>
+<h4><a href="condition">重置</a></h4>
+<hr>
+<br>
+<li>输入的sku: {{condition5}}  站点：{{condition6}}</li>
+<li>最近15天的平均销量: {{condition1}}</li>
+<li>亚马逊当前库存: {{condition2}}</li>
+<li>在途批次及数量: {{condition3}}</li>
+<li>在途批次预计到达仓库时间: {{condition4}}</li>
+<hr>
+<h4>所有批次上架之前的断货可能性：</h4>
+<!--<li>所有批次都到仓库后上一个批次耗尽经过的时间： {{data1}}天</li>-->
+<!--<li>所有批次都到仓库时的所有总库存： {{data2}}</li>-->
+<!--<li>所有批次都到仓库时的当前库存： {{data3}}</li>-->
+<li>所有批次到仓库前的断货可能性：</li>
+{% for i in data4 %}
+<li>{{i}}</li>
+<hr>
+{% endfor %}
+<h4>补货建议：</h4>
+<li>所有批次能够维持库存的时间： {{result4}}天</li>
+<li>剩余时间： {{result5}}天</li>
+<li>{{result1}}</li>
+<li>{{result2}}</li>
+<li>{{result3}}</li>
+<hr>
+<h4>补货实施方案：</h4>
+<li>可选择的补货方式：{{show1}}</li>
+<li>空运补货时间及数量：</li>
+{% for x,y in elm1 %}
+<li>{{x}}----{{limit_quantity}}-{{y}}</li>
+{% endfor %}
+<hr>
+<li>陆运补货时间及数量：</li>
+{% for x,y in elm2 %}
+<li>{{x}}----{{limit_quantity}}-{{y}}</li>
+{% endfor %}
+<hr>
+<li>海运补货时间及数量：</li>
+{% for x,y in elm3 %}
+<li>{{x}}----{{limit_quantity}}-{{y}}</li>
+{% endfor %}
+<!--<script src="/static/js/jquery-3.2.1.min.js"></script>-->
+</body>
+</html>
+<script></script>
